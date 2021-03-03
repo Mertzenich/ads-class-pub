@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stack exercise"""
+"""Testing Grounds"""
 
 from pythonds3.basic import Stack
 
@@ -79,20 +79,23 @@ def par_checker_file(filename):
 
 def base_converter(dec_num, base):
     """Convert a decimal number to any base"""
-    if base not in [2, 8, 16]:
-        raise ValueError(f'Cannot convert to base {base}.')
+    try:
+        if base not in [2, 8, 16]:
+            raise ValueError(f'Cannot convert to base {base}.')
+    except ValueError as exception:
+        return exception
 
     digits = "0123456789ABCDEF"
-    remains = Stack()
+    rems = Stack()
 
     while dec_num > 0:
         rem = dec_num % base
-        remains.push(rem)
+        rems.push(rem)
         dec_num = dec_num // base
 
     output = ''
-    while not remains.is_empty():
-        output += digits[remains.pop()]
+    while not rems.is_empty():
+        output += digits[rems.pop()]
 
     return output
 
@@ -114,7 +117,6 @@ def rpn_calc(postfix_expr):
             else:
                 raise TokenError(f'Unknown token: {token}')
         answer = operand_stack.pop()
-        print(operand_stack.is_empty())
         if operand_stack.is_empty() is False:
             raise StackError("Stack is not empty")
         return answer
@@ -134,3 +136,11 @@ def do_math(oper, oper_one, oper_two):
         return oper_one - oper_two
     else:
         raise TokenError(f'Unknown token: {oper}')
+
+
+print(rpn_calc("1 6 0 + +"))
+print(rpn_calc("1 6 / 0 -"))
+print(rpn_calc("1 6 // 0 **"))
+print(rpn_calc("1 6 0 +"))
+print(rpn_calc("1 6 0 + - *"))
+print(rpn_calc("1 1 + 1 6 + ** 1 9 + 1 9 + * /"))

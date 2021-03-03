@@ -4,9 +4,14 @@ Dice game(s) simulator
 """
 
 import random
-from src.projects.dice import Die, FrozenDie, Cup
 
-# from dice_classes import Die, FrozenDie, Cup  # try this if the above import statement does not work
+# from src.projects.dice import Die, FrozenDie, Cup
+
+from dice_classes import (
+    Die,
+    FrozenDie,
+    Cup,
+)  # try this if the above import statement does not work
 
 random.seed(42)
 
@@ -34,7 +39,7 @@ def main():
     my_cup.roll(1, 2, 3)
     print(my_cup)
     print("Re-rolling dice 2, 4, and 6")
-    my_cup.roll(2, 4, 6)
+    my_cup.roll(2, 4, 5)
     print(my_cup)
     print("Shaking and rolling")
     for _ in range(3):
